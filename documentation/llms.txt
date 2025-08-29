@@ -1,0 +1,25 @@
+Cette section fournit des notes et de la documentation pour les intégrations avec les modèles de langage (LLM) dans n8n.  
+
+### Présentation des fonctionnalités IA dans n8n
+
+n8n permet d'intégrer des modèles de langage comme OpenAI, Claude ou HuggingFace à l'aide de nœuds dédiés.  
+Les principaux nœuds IA sont :
+
+- **Agent IA (Tools Agent)** : ce nœud orchestration utilise un modèle de langage pour choisir et appeler dynamiquement d'autres nœuds n8n en fonction d'une requête. Il fonctionne depuis la version 1.82 de n8n et nécessite au moins un « outil » (sub‑nœud) configuré.  
+- **Agent conversationnel** : permet de créer un chatbot avec mémoire de conversation. Contrairement au Tools Agent, il n'exécute pas de nœuds mais renvoie des réponses textuelles en appelant des fonctions à la demande. Ce mode est idéal pour les assistants qui doivent maintenir du contexte mais qui n’ont pas besoin d'appeler automatiquement des actions.  
+- **Chaîne LLM simple** : un flux minimaliste qui envoie une requête à un modèle de langage et reçoit une réponse.  
+
+Pour chaque nœud, vous pouvez configurer :  
+• le modèle (OpenAI GPT‑3/4, Claude, etc.),  
+• la température et le nombre de jetons,  
+• le prompt système et les messages utilisateur,  
+• des paramètres avancés comme le nombre d’itérations ou le retour des étapes intermédiaires.
+
+### Bonnes pratiques
+
+- **Décomposer les prompts** : stockez les instructions système et utilisateur dans des champs séparés et utilisez des variables d’environnement pour la configuration.  
+- **Limiter le nombre de jetons** : définissez des limites selon le cas d’usage pour éviter des coûts inattendus.  
+- **Surveiller la sécurité** : ne transmettez jamais d’informations sensibles au modèle sans chiffrement.  
+- **Mettre en cache les appels** : pour réduire les coûts et améliorer la latence, stockez les réponses dans une base de données ou un cache lorsque cela est possible.
+
+Pour plus d’exemples et de workflows, consultez les sous‑dossiers du répertoire `templates/ai-agents`.
